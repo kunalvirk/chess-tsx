@@ -1,0 +1,39 @@
+.game {
+    position: relative;
+    display: flex;
+    padding: 1rem 1rem 2rem 2rem;
+}
+ul.board-info {
+    position: absolute;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+ul.board-info > li {
+
+}
+ul.board-info.board-left {
+    left: 0;
+    height: 100%;
+    flex-direction: column-reverse;
+    max-height: calc(100vh * 0.85);
+}
+ul.board-info.board-left > li {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+ul.board-info.board-bottom {
+    right: 1rem;
+    width: 100%;
+    bottom: 0;
+    max-width: calc(100vh * 0.9);;
+}
+ul.board-info.board-bottom > li {
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+}

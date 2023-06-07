@@ -13,19 +13,18 @@ const Piece: React.FC<React.PropsWithChildren<PieceProps>> = ({name, pos, ...pro
     const imageName = color + name.toUpperCase();
 
     const fallback = () => {
-        console.log("dd")
         return `/assets/images/empty.png`;
     };
 
     const handleDragStart = (e) => {
-        props.setFromPos(pos);
 
+        props.setFromPos(pos);
         props.suggestMoves(name, pos);        
 
         setTimeout(() => {
-
             piece.current.style.display = 'none';
         }, 0);
+        
     };
     const handleDragEnd = () => {
         piece.current.style.display = 'block';
