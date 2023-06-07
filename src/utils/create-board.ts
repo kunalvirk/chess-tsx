@@ -22,6 +22,7 @@ const range = (n: number): number[] => {
  * @returns {Cell[]}
  */
 export const createBoard = (fenString: string): Cell[] => {
+    
     const fen = fenString.split(' ')[0]; //Get the first portion
 
     const fenPieces = fen.split('/').join(''); //remove the row delimiters '/'
@@ -29,12 +30,28 @@ export const createBoard = (fenString: string): Cell[] => {
 
     let pieces: string[] = Array.from(fenPieces);
 
-    //Save individual pieces for each of the 64 cells
+    /**
+     * Convert all the `number` occurences to an array
+     * for example, after building the `pieces` array from FEN string
+     * it will look something like this
+     * 
+     * ['r', 'n', 'b', 'q', 'k', 'b', 'n', 'r', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p', '8', '8', '8', '8', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R']
+     * 
+     * Now to build the chessboard perfectly, we want to loop over these cells
+     * so instead of keeping it `8` or any number (the above array will change after every move)
+     * to an array of the same length as the number
+     * 
+     * For ex: if the number is 4, we will fill that space with an array of 4 empty string ''
+     * 
+     */
     pieces.forEach((item, index) => {
         if (!isNaN(Number(item)) && isFinite(Number(item))) {
+            console.log("item", item);
             pieces.splice(index, 1, range(Number(item)).fill(''));
         }
     });
+
+    // Flatten out the above built array to loop over and generate cells
     pieces = pieces.flat();
 
     const rows = range(8)
@@ -51,6 +68,8 @@ export const createBoard = (fenString: string): Cell[] => {
             cells.push(col + row); //e.g a1, b1, c1...
         }
     }
+
+    // Build the board
     const board: Cell[] = [];
     for (let i = 0; i < cells.length; i++) {
         //'cells', and 'pieces' have the same length of 64
@@ -62,6 +81,6 @@ export const createBoard = (fenString: string): Cell[] => {
     return board;
 };
 
-console.log(
-    createBoard('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1')
-);
+// console.log(
+//     createBoard('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1')
+// );

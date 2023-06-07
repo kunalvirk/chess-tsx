@@ -14,3 +14,18 @@
 .dark {
     background-color: #b6b3b3;
 }
+.highlight {
+    position:relative;
+    background-color: cornsilk;
+}
+.highlight:before {
+    content:'';
+    width: 20px;
+    height: 20px;
+    background-color: orange;
+    position:absolute;
+    transform: translate(-50%, -50%);
+    top:50%;
+    left:50%;
+    border-radius:50%;
+}
