@@ -1,0 +1,16 @@
+.cell {
+    text-align: center;
+    padding: 0.25rem 0.35rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: calc((100vh * 0.9) / 9.5);
+    height: calc((100vh * 0.85) / 9.5);
+}
+
+.light {
+    background-color: rgb(235, 228, 219);
+}
+.dark {
+    background-color: #b6b3b3;
+}
