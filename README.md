@@ -2,6 +2,14 @@
 # Chess TSX
 This is a simple React chess application that can be used to play chess with others online. It is built using React.js, TypeScript, Node.js, Express.js, and Socket.io.
 
+![demo](./demo.png?raw=true)
+
+## Concepts
+- It uses chess.js to manage the core logic of chess
+- The chess board is being built using custom utility function that can be found in 'src/utils/create-board.ts'
+- This will use redux to manage state such as 'IS_CHECK, IS_CHECKMATE, CURRENT_TURN' etc. (currently the state is being managed by context API)
+
+
 ## Features
 - Multiplayer capabilities
 - Valid move highlighting
