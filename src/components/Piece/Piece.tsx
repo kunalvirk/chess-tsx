@@ -5,7 +5,7 @@ interface PieceProps {
     pos: string;
 }
 
-const Piece: React.FC<React.PropsWithChildren<PieceProps>> = ({name, pos, ...props}) => {
+const Piece: React.FC<React.PropsWithChildren<PieceProps>> = ({name, pos}) => {
 
     const piece = useRef();
 
