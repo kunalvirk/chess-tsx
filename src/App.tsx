@@ -1,13 +1,15 @@
-import './App.css'
-import { GameProvider } from './context/GameContext'
-import Game from './pages/Game/Game'
+import { Provider } from 'react-redux';
+import './App.css';
+// import { GameProvider } from './context/GameContext';
+import Game from './pages/Game/Game';
+import store from './store';
 
 const App: React.FC = () => {
-  return (
-    <GameProvider>
+  return (    
+    <Provider store={store}>
       <Game />
-    </GameProvider>
-  )
-}
+    </Provider>
+  );
+};
 
-export default App
+export default App;
