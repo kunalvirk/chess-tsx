@@ -1,19 +1,17 @@
 import React, { useRef } from 'react';
+import { useDispatch } from 'react-redux';
+import { setSelectedCell } from '../../store';
 
 interface PieceProps {
   name: string;
   pos: string;
-  setFromPos: (pos: string) => void;
-  suggestMoves: (name: string, pos: string) => void;
 }
 
 const Piece: React.FC<React.PropsWithChildren<PieceProps>> = ({
   name,
-  pos,
-  setFromPos,
-  suggestMoves,
-  ...props
+  pos
 }) => {
+  const dispatch = useDispatch();
   const piece = useRef<HTMLImageElement>(null);
 
   const color = name === name.toUpperCase() ? 'w' : 'b';
@@ -21,10 +19,9 @@ const Piece: React.FC<React.PropsWithChildren<PieceProps>> = ({
 
   const fallback = () => `/assets/images/empty.png`;
 
-  const handleDragStart = async (e: React.DragEvent<HTMLImageElement>) => {
+  const handleDragStart = async () => {
     try {
-      await setFromPos(pos);
-      await suggestMoves(name, pos);
+      dispatch(setSelectedCell(pos));
       setTimeout(() => {
         if (piece.current) piece.current.style.display = 'none';
       }, 0);

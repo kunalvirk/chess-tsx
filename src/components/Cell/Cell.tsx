@@ -1,24 +1,27 @@
-import React, { useContext, useState } from 'react'
+import React from 'react';
 import './Cell.css';
 import { ICell } from '../../types';
 import { isLightSquare } from '../../utils/cell-color';
 import Piece from '../Piece/Piece';
-import { GameContext } from '../../context/GameContext';
+import { useDispatch, useSelector } from 'react-redux';
+import { makeMove } from '../../store';
 
 interface CellProps {
     cell: ICell;
     index: number;
 }
 
-const Cell: React.FC<React.PropsWithChildren<CellProps>> = ({ cell, index, ...props }) => {
+const Cell: React.FC<React.PropsWithChildren<CellProps>> = ({ cell, index }) => {
+
+    const possibleMoves: [] = useSelector(state => state.game.possibleMoves);
+    const dispatch = useDispatch();
 
     const isLightBlock = isLightSquare(cell.pos, index);
 
-    const { possibleMoves } = useContext(GameContext);
     const isPossibleMove = possibleMoves.includes(cell.pos);
     
     const handleDrop = () => {
-        props.makeMove(cell.pos);
+        dispatch(makeMove(cell.pos));
     };
 
     return (
@@ -27,10 +30,10 @@ const Cell: React.FC<React.PropsWithChildren<CellProps>> = ({ cell, index, ...pr
             onDrop={handleDrop}
             onDragOver={(e) => e.preventDefault()}
         >
-            <Piece name={cell.piece} pos={cell.pos} setFromPos={props.setFromPos} suggestMoves={props.suggestMoves}/>
+            <Piece name={cell.piece} pos={cell.pos} />
             
         </div>
     );
-}
+};
 
-export default Cell
+export default Cell;

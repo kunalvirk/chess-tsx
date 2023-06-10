@@ -46,7 +46,6 @@ export const createBoard = (fenString: string): Cell[] => {
      */
     pieces.forEach((item, index) => {
         if (!isNaN(Number(item)) && isFinite(Number(item))) {
-            console.log("item", item);
             pieces.splice(index, 1, range(Number(item)).fill(''));
         }
     });
