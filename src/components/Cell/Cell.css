@@ -8,6 +8,10 @@
     height: calc((100vh * 0.85) / 9.5);
 }
 
+.cell.check {
+    background: linear-gradient(102.2deg, rgb(250, 45, 66) 9.6%, rgb(245, 104, 104) 96.1%);
+}
+
 .light {
     background-color: rgb(235, 228, 219);
 }

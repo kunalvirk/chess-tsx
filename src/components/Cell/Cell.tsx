@@ -4,7 +4,7 @@ import { ICell } from '../../types';
 import { isLightSquare } from '../../utils/cell-color';
 import Piece from '../Piece/Piece';
 import { useDispatch, useSelector } from 'react-redux';
-import { makeMove } from '../../store';
+import { makeMove, useAppSelector } from '../../store';
 
 interface CellProps {
     cell: ICell;
@@ -13,20 +13,28 @@ interface CellProps {
 
 const Cell: React.FC<React.PropsWithChildren<CellProps>> = ({ cell, index }) => {
 
-    const possibleMoves: [] = useSelector(state => state.game.possibleMoves);
+    const {possibleMoves, turn, isCheck} = useAppSelector(state => state.game);
     const dispatch = useDispatch();
 
     const isLightBlock = isLightSquare(cell.pos, index);
 
     const isPossibleMove = possibleMoves.includes(cell.pos);
     
+    // Determine the `piece` and `color`
+    const color = cell.piece.toUpperCase() === cell.piece ? 'w' : 'b';
+
+    const inCheck = () => {
+        const king = cell.piece.toUpperCase() === 'K';
+        return turn === color && king && isCheck;
+    };
+
     const handleDrop = () => {
         dispatch(makeMove(cell.pos));
     };
 
     return (
         <div
-            className={`cell ${isLightBlock ? 'light' : 'dark'} ${isPossibleMove && 'highlight'}`}
+            className={`cell ${isLightBlock ? 'light' : 'dark'} ${isPossibleMove && 'highlight'} ${inCheck() && 'check'}`}
             onDrop={handleDrop}
             onDragOver={(e) => e.preventDefault()}
         >

@@ -3,9 +3,11 @@ import { createBoard } from "./utils/create-board";
 import { Chess } from "chess.js";
 import { ICell } from "./types";
 import { TypedUseSelectorHook, useSelector } from "react-redux";
+import toast from "react-simple-toasts";
 
 // Default FEN string
-const FEN = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
+// const FEN = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
+const FEN = 'r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 0 1';
 
 // Instantiate `chess.js`
 export const chess = new Chess(FEN);
@@ -17,6 +19,7 @@ export interface IGameState {
     isCheckMate: boolean;
     turn: string;
     selectedCell: string | null;
+    isGameOver: boolean;
 }
 
 
@@ -28,6 +31,7 @@ const initialState: IGameState = {
     turn: chess.turn(),
     possibleMoves: [],
     selectedCell: null,
+    isGameOver: false
 };
 
 
@@ -56,7 +60,20 @@ const gameSlice = createSlice({
             const from = state.selectedCell as string;
             const to = action.payload;
             
-            chess.move({from, to});
+            try {
+                chess.move({from, to, promotion: 'q'});
+
+                state.isCheck = chess.inCheck();
+                state.isCheckMate = chess.isCheckmate();
+                state.isGameOver = chess.isGameOver();
+
+            } catch(e) {
+                console.log("Error", e);
+                console.log("in check", chess.isCheck());
+                console.log("is check mate", chess.isCheckmate());
+                toast('Invalid move!', { className: 'theme-toast' });
+            }
+
 
             // Set the updated FEN string
             state.board = createBoard(chess.fen());
