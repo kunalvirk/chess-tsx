@@ -10,6 +10,13 @@ class Cell implements ICell {
         this.pos = pos;
         this.piece = piece;
     }
+
+    serialize() {
+        return {
+            pos: this.pos,
+            piece: this.piece,
+        };
+    }
 }
 //  returns an array of range 1, n
 const range = (n: number): number[] => {
@@ -21,7 +28,7 @@ const range = (n: number): number[] => {
  * @param {String} fenString rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
  * @returns {Cell[]}
  */
-export const createBoard = (fenString: string): Cell[] => {
+export const createBoard = (fenString: string): ICell[] => {
     
     const fen = fenString.split(' ')[0]; //Get the first portion
 
@@ -69,12 +76,12 @@ export const createBoard = (fenString: string): Cell[] => {
     }
 
     // Build the board
-    const board: Cell[] = [];
+    const board: ICell[] = [];
     for (let i = 0; i < cells.length; i++) {
         //'cells', and 'pieces' have the same length of 64
         const cell = cells[i];
         const piece = pieces[i];
-        board.push(new Cell(cell, piece));
+        board.push(new Cell(cell, piece).serialize());
     }
 
     return board;

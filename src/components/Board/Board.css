@@ -8,3 +8,6 @@
     padding-left: 0.4rem;
     padding-top: 0.5rem;
 }
+.game-over {
+    opacity:0.5;
+}

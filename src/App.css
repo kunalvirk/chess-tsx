@@ -18,6 +18,21 @@
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
+.theme-toast {
+  background: rgba(0,0,10,.8);
+  border-radius: 40px;
+  box-shadow: 1px 2px 5px 1px #0003;
+  color: #fff;
+  font-size: 16px;
+  line-height: 1.5;
+  min-width: 290px;
+  overflow: hidden;
+  padding: 12px 22px;
+  text-align: center;
+  vertical-align: top;
+  white-space: pre-line;
+}
+
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
