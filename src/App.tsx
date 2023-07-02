@@ -1,15 +1,19 @@
-import { Provider } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import './App.css';
-// import { GameProvider } from './context/GameContext';
 import Game from './pages/Game/Game';
-import store from './store';
+import { createRoom } from './store';
 
 const App: React.FC = () => {
-  return (    
-    <Provider store={store}>
-      <Game />
-    </Provider>
-  );
+
+  // Get room id using query param
+  const urlSearchParams = new URLSearchParams(window.location.search);
+  const name: string = urlSearchParams.get('name');
+
+  const dispatch = useDispatch();
+
+  dispatch(createRoom(name));
+
+  return <Game />;
 };
 
 export default App;
