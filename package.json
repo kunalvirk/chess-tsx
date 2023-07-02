@@ -16,7 +16,8 @@
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.7",
     "react-simple-toasts": "^5.1.0",
-    "redux": "^4.2.1"
+    "redux": "^4.2.1",
+    "socket.io-client": "^4.6.2"
   },
   "devDependencies": {
     "@types/chess.js": "^0.13.4",

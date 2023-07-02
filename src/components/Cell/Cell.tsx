@@ -3,7 +3,7 @@ import './Cell.css';
 import { ICell } from '../../types';
 import { isLightSquare } from '../../utils/cell-color';
 import Piece from '../Piece/Piece';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { makeMove, useAppSelector } from '../../store';
 
 interface CellProps {
@@ -13,7 +13,7 @@ interface CellProps {
 
 const Cell: React.FC<React.PropsWithChildren<CellProps>> = ({ cell, index }) => {
 
-    const {possibleMoves, turn, isCheck} = useAppSelector(state => state.game);
+    const {possibleMoves, turn, isCheck, selectedCell} = useAppSelector(state => state.game);
     const dispatch = useDispatch();
 
     const isLightBlock = isLightSquare(cell.pos, index);
@@ -29,7 +29,7 @@ const Cell: React.FC<React.PropsWithChildren<CellProps>> = ({ cell, index }) => 
     };
 
     const handleDrop = () => {
-        dispatch(makeMove(cell.pos));
+        dispatch(makeMove({from: selectedCell, to: cell.pos}));
     };
 
     return (

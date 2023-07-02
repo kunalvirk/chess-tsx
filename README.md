@@ -34,5 +34,8 @@ The application will be available at http://localhost:5173/.
 ## Usage
 To play chess, simply create a room and share the room code with another user. The other user can then join the room and you can start playing.
 
+## Icons
+- [Flaticons](https://www.flaticon.com/free-icons/chess)
+
 ## License
 This project is licensed under the MIT License.
