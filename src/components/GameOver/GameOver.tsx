@@ -1,12 +1,11 @@
 import React from 'react';
 import { useAppSelector } from '../../store';
 import Layout from '../Layout/Layout';
-
 const GameOver: React.FC = () => {
 
     // Grab the `status` and `turn` from global state
     const { turn, status } = useAppSelector(state => state.game);
-
+    
     // Determine winner
     let winner;
 
@@ -17,6 +16,8 @@ const GameOver: React.FC = () => {
             winner = 'white';
         }
     }
+
+    let onPlayAgain: () => void = function (): void {window.location.reload();}
 
 
     const content = () => (
@@ -30,7 +31,7 @@ const GameOver: React.FC = () => {
                     <mark>{winner}</mark> won
                 </p>
             )}
-            <button>Play Again</button>
+            <button onClick={onPlayAgain}>Play Again</button>
         </React.Fragment>
     );
 
